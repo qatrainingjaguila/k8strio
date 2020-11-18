@@ -1,0 +1,6 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: duo-task
+  labels:
+    name: duo-task

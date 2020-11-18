@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+  namespace: duo-task
+  labels:
+    app: flask
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask-app
+        image: qatrainingjaguila/luketrio
+        ports:
+        - containerPort: 5000
+        env:
+        -  name: DATABASE_URI  # The env variable required for the container
+           valueFrom:
+             secretKeyRef:
+               name: pwsecret #the metadata name of the secret it is referring to
+               key: DATABASE_URI #The key of the value we want in the secret yaml file
